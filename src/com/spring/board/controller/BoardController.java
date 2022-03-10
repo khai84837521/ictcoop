@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
@@ -34,6 +36,7 @@ public class BoardController {
 	
 	@Autowired 
 	boardService boardService;
+	@Autowired 
 	comCodeService comCodeService;
 	
 	
@@ -84,26 +87,23 @@ public class BoardController {
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model, ComCodeVo comCodeVo) throws Exception{
 		
-		List<ComCodeVo> comCodeType = new ArrayList<ComCodeVo>();
-		
-		System.out.println("controller pass");
-		
-		comCodeType = comCodeService.SelectComCodeList();
+		List<ComCodeVo> comCodeList = new ArrayList<ComCodeVo>();
 		
 		
+		comCodeList = comCodeService.SelectComCodeList();
+		model.addAttribute("comCodeList", comCodeList);
 		return "board/boardWrite";
 	}
 	
 	@RequestMapping(value = "/board/boardWriteAction.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String boardWriteAction(Locale locale,BoardVo boardVo) throws Exception{
+	public String boardWriteAction(Locale locale,BoardVo boardVo, HttpServletRequest request) throws Exception{
 		
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		
-		System.out.println(boardVo.getBoardTitle());
-		System.out.println(boardVo.getBoardComment());
-		
+		String comCodeId = request.getParameter("codeId");
+		boardVo.setBoardType(comCodeId);
 		
 		int resultCnt = boardService.boardInsert(boardVo);
 		result.put("success", (resultCnt > 0)?"Y":"N");

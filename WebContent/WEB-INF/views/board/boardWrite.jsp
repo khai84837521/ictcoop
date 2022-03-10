@@ -53,9 +53,11 @@
 						Type
 						</td>
 						<td width="400">
-						<c:forEach var = "comCodeType" items = "${comCodeType}" varStatus="status">
-							<c:out value="${comCodeType }"/>
-						</c:forEach>
+						<select name = "codeId">
+							<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">
+								<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>
+							</c:forEach>
+						</select>
 						</td>
 					</tr>
 					<tr>

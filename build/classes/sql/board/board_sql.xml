@@ -10,12 +10,12 @@
     </resultMap>
     
     <select id="boardList" parameterType="com.spring.board.vo.PageVo" resultMap="boardVo">
-        SELECT 
-		  BOARD_TYPE
-		  ,BOARD_NUM
-		  ,BOARD_TITLE
-		  ,BOARD_COMMENT
-		  ,TOTAL_CNT
+		SELECT 
+		  C.CODE_NAME as BOARD_TYPE
+		  ,S.BOARD_NUM
+		  ,S.BOARD_TITLE
+		  ,S.BOARD_COMMENT
+		  ,S.TOTAL_CNT
 		FROM 
 		(
 		  SELECT
@@ -26,9 +26,11 @@
 		      	,ROW_NUMBER() OVER(ORDER BY BOARD_NUM DESC) AS NUMROW
 		      	,COUNT(*) OVER() AS TOTAL_CNT
 			FROM
-				BOARD	
-		)
+				BOARD
+		) S JOIN COM_CODE C
+        ON S.BOARD_TYPE = C.CODE_ID
 		WHERE NUMROW BETWEEN (#{pageNo}-1)*10 + 1 AND (#{pageNo})*5
+		
     </select>
     
     <select id="boardTotal" parameterType="Integer" resultType="Integer">
@@ -63,10 +65,10 @@
         ,MODIFIED_TIME
         )
         VALUES
-        ('1'
+        (#{boardType}
         ,(SELECT NVL(TO_NUMBER(MAX(BOARD_NUM)+1),1)
 	    	FROM BOARD
-	    	WHERE BOARD_TYPE = '1')
+	    	WHERE BOARD_TYPE = #{boardType})
         ,#{boardTitle}
         ,#{boardComment}
         ,'SYSTEM'
