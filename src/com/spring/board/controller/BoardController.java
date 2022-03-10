@@ -23,7 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.board.HomeController;
 import com.spring.board.service.boardService;
+import com.spring.board.service.comCodeService;
 import com.spring.board.vo.BoardVo;
+import com.spring.board.vo.ComCodeVo;
 import com.spring.board.vo.PageVo;
 import com.spring.common.CommonUtil;
 
@@ -32,6 +34,8 @@ public class BoardController {
 	
 	@Autowired 
 	boardService boardService;
+	comCodeService comCodeService;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -78,7 +82,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.GET)
-	public String boardWrite(Locale locale, Model model) throws Exception{
+	public String boardWrite(Locale locale, Model model, ComCodeVo comCodeVo) throws Exception{
+		
+		List<ComCodeVo> comCodeType = new ArrayList<ComCodeVo>();
+		
+		System.out.println("controller pass");
+		
+		comCodeType = comCodeService.SelectComCodeList();
 		
 		
 		return "board/boardWrite";
@@ -133,7 +143,6 @@ public class BoardController {
 		int updateRes = boardService.boardUpdate(boardVo);
 		result.put("success", (updateRes > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-		
 		System.out.println("callbackMsg::"+callbackMsg);
 		
 		return callbackMsg;

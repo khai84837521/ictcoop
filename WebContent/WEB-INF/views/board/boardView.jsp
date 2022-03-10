@@ -24,9 +24,6 @@
 						    data : param,
 						    success: function(data, textStatus, jqXHR)
 						    {
-								$j('#boardTitle').html('${board.boardTitle}');
-								$j('#boardComment').html('${board.boardComment}');
-								$j('#updateBtn').val("수정");	
 								alert("수정완료");
 								location.reload();
 						    },
@@ -41,6 +38,7 @@
 				}else{
 					$j('#boardTitle').html('<input name="boardTitle" type="text" size="50" value="${board.boardTitle}">');
 					$j('#boardComment').html('<textarea name="boardComment"  rows="20" cols="55">${board.boardComment}</textarea>');
+					$j('#deleteBtn').attr('type', 'hidden');
 					$j('#updateBtn').val("확인");	
 				}
 			}); //개시판 글 수정
@@ -77,12 +75,13 @@
 	
 </head>
 <body class = "boardUpdate">
+<!-- hidden tags -->
+<input id = "boardNum" name = "boardNum" type="hidden" value="${boardNum}">
 <table align="center">
 		<tr>
 			<td align="right">
 					<input id = "updateBtn" type="button" value="수정"> <!-- 게시판 수정 버튼 -->
 					<input id = "deleteBtn" type="button" value="삭제"> <!-- 게시판 삭제  버튼-->
-					<input id = "boardNum" name = "boardNum" type="hidden" value="${boardNum}">
 			</td>
 			
 		</tr>

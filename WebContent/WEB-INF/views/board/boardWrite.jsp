@@ -14,7 +14,6 @@
 		$j("#submit").on("click",function(){
 			var $frm = $j('.boardWrite :input');
 			var param = $frm.serialize();
-			
 			$j.ajax({
 			    url : "/board/boardWriteAction.do",
 			    dataType: "json",
@@ -26,7 +25,7 @@
 					
 					alert("¸Þ¼¼Áö:"+data.success);
 					
-					location.href = "/board/boardList.do";
+					location.href = "/board/boardList.do?pageNo=1";
 			    },
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
@@ -48,7 +47,17 @@
 		</tr>
 		<tr>
 			<td>
-				<table border ="1"> 
+				<table border ="1">
+					<tr>
+						<td width="120" align="center">
+						Type
+						</td>
+						<td width="400">
+						<c:forEach var = "comCodeType" items = "${comCodeType}" varStatus="status">
+							<c:out value="${comCodeType }"/>
+						</c:forEach>
+						</td>
+					</tr>
 					<tr>
 						<td width="120" align="center">
 						Title

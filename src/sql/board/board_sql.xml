@@ -84,8 +84,8 @@
     <update id="boardUpdate" parameterType="com.spring.board.vo.BoardVo">
     	UPDATE BOARD
     	SET
-    	BOARD_TITLE = #{boardTitle},
-    	BOARD_COMMENT = #{boardComment}
+	    	BOARD_TITLE = #{boardTitle},
+	    	BOARD_COMMENT = #{boardComment}
     	WHERE BOARD_NUM = #{boardNum}
     </update>
 </mapper>
