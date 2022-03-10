@@ -65,7 +65,11 @@ public class BoardController {
 		
 		
 		boardVo = boardService.selectBoard(boardType,boardNum);
-		
+		if(boardVo == null) {
+			System.out.println("삭제된 페이지입니다.");
+			return "board/msgbox";
+			
+		}
 		model.addAttribute("boardType", boardType);
 		model.addAttribute("boardNum", boardNum);
 		model.addAttribute("board", boardVo);
