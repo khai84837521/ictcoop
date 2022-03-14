@@ -9,24 +9,41 @@
 </head>
 <script type="text/javascript">
 
+	function chkAll() {
+		var total = $j("input[name=typeChk]").length;
+		var checked = $j("input[name=typeChk]:checked").length;
+
+		if(total != checked) $j("#chkBoxAll").prop("checked", false);
+		else $j("#chkBoxAll").prop("checked", true); 
+	}
+
 	$j(document).ready(function(){
+		
+		chkAll();
 		
 		var chkParams = [];
 		
 		if($j('input:hidden[name=chked]') != null){
 			$j('input:hidden[name=chked]').each(function() { 
-				arr.push(this.value); 
-			}
+				chkParams.push(this.value); 
+			})
+		};
+		
+		
+		var typeChk = [];
+		$j("input[name=typeChk]").each(function() { 
+			typeChk.push(this.value); 
 		});
+
 		
-		alert(chkParams);
-		
-// 		var typeChk = [];
-// 		$j("input[name=typeChk]").each(function() { 
-// 			arr.push(this.value); 
-// 		});
-		
-// 		alert(typeChk);
+		for (var i = 0; i < typeChk.length; i++) {
+			for (var k = 0; k < chkParams.length; k++) {
+				if(chkParams[k] == typeChk[i]){
+					$j("#"+typeChk[i]).prop("checked", true);
+					chkAll();
+				}
+			}	
+		}
 		
 	
 		
@@ -34,17 +51,16 @@
 			if($j("#chkBoxAll").is(":checked")){
 				$j("input[name=typeChk]").prop("checked", true);
 			}
-			else $j("input[name=typeChk]").prop("checked", false);
+			else {
+				$j("input[name=typeChk]").prop("checked", false);
+			}
 		});
 		
 		
 		$j("input[name=typeChk]").click(function() {
-			var total = $j("input[name=typeChk]").length;
-			var checked = $j("input[name=typeChk]:checked").length;
-
-			if(total != checked) $j("#chkBoxAll").prop("checked", false);
-			else $j("#chkBoxAll").prop("checked", true); 
+			chkAll();
 		});
+		
 		
 
 	});
@@ -98,9 +114,9 @@
 	<tr align="left">
 		<td>
 			<form action="/board/boardList.do" method = "get" id = "form">
-			<input type ="checkbox" id ="chkBoxAll" name = "typeChk" value = "all">전체
+			<input type ="checkbox" id ="chkBoxAll">전체
 			<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">
-				<input type ="checkbox" name = "typeChk" value="${comCodeList.codeId}">${comCodeList.codeName}
+				<input id = "${comCodeList.codeId}" type ="checkbox" name = "typeChk" value="${comCodeList.codeId}">${comCodeList.codeName}
 			</c:forEach>
 			<input type = "submit" id = "search" value="조회">
 			</form>
