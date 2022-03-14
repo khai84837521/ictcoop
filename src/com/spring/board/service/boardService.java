@@ -1,5 +1,6 @@
 package com.spring.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.spring.board.vo.BoardVo;
@@ -9,7 +10,7 @@ public interface boardService {
 
 	public String selectTest() throws Exception;
 
-	public List<BoardVo> SelectBoardList(PageVo pageVo) throws Exception;
+	public List<BoardVo> SelectBoardList(HashMap<String, Object> boardSearch) throws Exception;
 
 	public BoardVo selectBoard(String boardType, int boardNum) throws Exception;
 

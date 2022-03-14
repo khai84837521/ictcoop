@@ -18,7 +18,6 @@ public class comCodeServiceImpl implements comCodeService{
 	@Override
 	public List<ComCodeVo> SelectComCodeList() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service pass");
 		return comCodeDao.selectComCodeList();
 	}
 	

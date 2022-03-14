@@ -91,6 +91,16 @@
 			<table border ="1">
 				<tr>
 					<td width="120" align="center">
+					Type
+					</td>
+					<td width="400">
+					<span id = "boardType">
+					${board.boardType}
+					</span>
+					</td>
+				</tr>
+				<tr>
+					<td width="120" align="center">
 					Title
 					</td>
 					<td width="400">

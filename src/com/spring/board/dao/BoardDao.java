@@ -1,5 +1,6 @@
 package com.spring.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.spring.board.vo.BoardVo;
@@ -9,7 +10,7 @@ public interface BoardDao {
 
 	public String selectTest() throws Exception;
 
-	public List<BoardVo> selectBoardList(PageVo pageVo) throws Exception;
+	public List<BoardVo> selectBoardList(HashMap<String, Object> boardSearch) throws Exception;
 
 	public BoardVo selectBoard(BoardVo boardVo) throws Exception;
 

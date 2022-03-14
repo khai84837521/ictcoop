@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,9 +44,10 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/board/boardList.do", method = RequestMethod.GET)
-	public String boardList(Locale locale, Model model,PageVo pageVo) throws Exception{
+	public String boardList(Locale locale, Model model,PageVo pageVo, @RequestParam(required = false) String[] typeChk) throws Exception{
 		
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
+		List<ComCodeVo> comCodeList = new ArrayList<ComCodeVo>();
 		
 		int page = 1;
 		int totalCnt = 0;
@@ -53,15 +55,48 @@ public class BoardController {
 		if(pageVo.getPageNo() == 0){
 			pageVo.setPageNo(page);
 		}
+
+		HashMap<String, Object> boardSearch = new HashMap<>();
+		boardSearch.put("pageVo", pageVo);
+		boardSearch.put("typeChk", typeChk);
 		
-		boardList = boardService.SelectBoardList(pageVo);
+		
+		boardList = boardService.SelectBoardList(boardSearch);
 		totalCnt = boardService.selectBoardCnt();
+		comCodeList = comCodeService.SelectComCodeList();
 		
+		model.addAttribute("chk", typeChk);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageNo", page);
+		model.addAttribute("comCodeList", comCodeList);
+		
+		
 		return "board/boardList";
+		
 	}
+	
+	
+	
+//	@RequestMapping(value = "/board/boardListSearch.do", method = RequestMethod.GET)
+//	@ResponseBody
+//	public String boardList(@RequestParam("typeChk[]") List<String> typeChk, PageVo pageVo, Model model) throws Exception{
+//		
+//		List<BoardVo> boardList = new ArrayList<BoardVo>();
+//		
+//		HashMap<String, Object> boardListMap = new HashMap<String, Object>();
+//		
+//		boardListMap.put("pageVo", pageVo);
+//		boardListMap.put("typeChk", typeChk);
+//
+//		System.out.println(boardListMap.get("typeChk"));
+//		
+//		boardList = boardService.SelectBoardList(pageVo);
+//		
+//		model.addAttribute("boardList", boardList);
+//			
+//		return "1";
+//	}
 	
 	@RequestMapping(value = "/board/{boardType}/{boardNum}/boardView.do", method = RequestMethod.GET)
 	public String boardView(Locale locale, Model model
@@ -70,6 +105,7 @@ public class BoardController {
 		
 		BoardVo boardVo = new BoardVo();
 		
+		System.out.println("==========================보드타입" + boardType);
 		
 		boardVo = boardService.selectBoard(boardType,boardNum);
 		if(boardVo == null) {

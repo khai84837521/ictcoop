@@ -18,7 +18,6 @@ public class ComCodeDaoImpl implements ComCodeDao{
 	@Override
 	public List<ComCodeVo> selectComCodeList() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("DAO pass");
 
 		return sqlSession.selectList("comCode.comCodeList");
 	}

@@ -1,5 +1,6 @@
 package com.spring.board.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.spring.board.dao.BoardDao;
 import com.spring.board.service.boardService;
 import com.spring.board.vo.BoardVo;
-import com.spring.board.vo.PageVo;
 
 @Service
 public class boardServiceImpl implements boardService{
@@ -23,10 +23,10 @@ public class boardServiceImpl implements boardService{
 	}
 	
 	@Override
-	public List<BoardVo> SelectBoardList(PageVo pageVo) throws Exception {
+	public List<BoardVo> SelectBoardList(HashMap<String, Object> boardSearch) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return boardDao.selectBoardList(pageVo);
+		return boardDao.selectBoardList(boardSearch);
 	}
 	
 	@Override

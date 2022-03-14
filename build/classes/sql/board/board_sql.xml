@@ -9,7 +9,7 @@
     	<result property="boardComment" column="BOARD_COMMENT"/>
     </resultMap>
     
-    <select id="boardList" parameterType="com.spring.board.vo.PageVo" resultMap="boardVo">
+    <select id="boardList" parameterType="hashMap" resultMap="boardVo">
 		SELECT 
 		  C.CODE_NAME as BOARD_TYPE
 		  ,S.BOARD_NUM
@@ -23,14 +23,21 @@
 				,BOARD_NUM
 				,BOARD_TITLE
 				,BOARD_COMMENT
-		      	,ROW_NUMBER() OVER(ORDER BY BOARD_NUM DESC) AS NUMROW
+		      	,ROW_NUMBER() OVER(ORDER BY BOARD_NUM ASC) AS NUMROW
 		      	,COUNT(*) OVER() AS TOTAL_CNT
 			FROM
 				BOARD
+			<if test="typeChk != null">
+				WHERE BOARD_TYPE IN 
+				<foreach collection="typeChk" item = "type" open="(" close=")" separator=",">
+					#{type}
+				</foreach>
+			</if>
+				
 		) S JOIN COM_CODE C
         ON S.BOARD_TYPE = C.CODE_ID
-		WHERE NUMROW BETWEEN (#{pageNo}-1)*10 + 1 AND (#{pageNo})*5
-		
+		WHERE NUMROW BETWEEN (#{pageVo.pageNo}-1)*10 + 1 AND (#{pageVo.pageNo})*5
+
     </select>
     
     <select id="boardTotal" parameterType="Integer" resultType="Integer">
@@ -42,14 +49,18 @@
     	
     <select id="boardView" parameterType="com.spring.board.vo.BoardVo" resultMap="boardVo">
     	SELECT
-        	BOARD_TYPE
-			,BOARD_NUM
-			,BOARD_TITLE
-			,BOARD_COMMENT
+        	C.CODE_NAME as BOARD_TYPE
+			,B.BOARD_NUM
+			,B.BOARD_TITLE
+			,B.BOARD_COMMENT
 		FROM
-			BOARD
-    	WHERE 	BOARD_TYPE = #{boardType}
-    	AND 	BOARD_NUM  = #{boardNum}
+			BOARD B
+		JOIN
+			COM_CODE C
+		ON
+			B.BOARD_TYPE = C.CODE_ID
+    	WHERE 	C.CODE_NAME = #{boardType}
+    	AND 	B.BOARD_NUM  = #{boardNum}
     </select>	
     
     <select id="boardInsert" parameterType="com.spring.board.vo.BoardVo">
