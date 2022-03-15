@@ -111,10 +111,22 @@ public class BoardController {
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		
-		String comCodeId = request.getParameter("codeId");
-		boardVo.setBoardType(comCodeId);
+		int resultCnt = 0;
+		String[] boardTypes = request.getParameterValues("codeId");
+		String[] boardTitles = request.getParameterValues("boardTitle");
+		String[] boardComments = request.getParameterValues("boardComment");
 		
-		int resultCnt = boardService.boardInsert(boardVo);
+		for (int i = 0; i < boardTitles.length; i++) {
+
+			boardVo.setBoardType(boardTypes[i]);
+			boardVo.setBoardTitle(boardTitles[i]);
+			boardVo.setBoardComment(boardComments[i]);
+			
+			resultCnt =+ boardService.boardInsert(boardVo);
+		}
+		
+		System.out.println(resultCnt);
+		
 		result.put("success", (resultCnt > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		
