@@ -39,7 +39,6 @@
 
 	});
 	
-	var count = 1;
 	function addRow() {
 		
 	      var dynamicTable = document.getElementById('boardWriter');
@@ -63,10 +62,21 @@
 	      cell4.innerHTML = '<input name="boardTitle" type="text" size="50" value="${board.boardTitle}">';
 	      cell5.innerHTML = 'Comment';
 	      cell6.innerHTML = '<textarea name="boardComment" rows="20" cols="55">${board.boardComment}</textarea>';
-	      
-	      count++;
 	   }
 
+	
+	function deleteRow(rownum) {
+		  // table element 찾기
+		  const dynamicTable = document.getElementById('boardWriter');
+		  if(dynamicTable.rows.length != 4){
+			  dynamicTable.deleteRow(rownum);
+			  dynamicTable.deleteRow(rownum);
+			  dynamicTable.deleteRow(rownum);
+		  }
+	}
+	
+	
+	
 </script>
 <body>
 <form class="boardWrite">
@@ -74,6 +84,7 @@
 		<tr>
 			<td align="right">
 			<input type="button" value="행추가" onclick='addRow()'>
+			<input type='button' value='행삭제' onclick='deleteRow(0)'>
 			<input id="submit" type="button" value="작성">
 			</td>
 		</tr>
