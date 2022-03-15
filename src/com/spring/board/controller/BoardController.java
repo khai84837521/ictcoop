@@ -55,13 +55,8 @@ public class BoardController {
 		if(pageVo.getPageNo() == 0){
 			pageVo.setPageNo(page);
 		}
-
-		HashMap<String, Object> boardSearch = new HashMap<>();
-		boardSearch.put("pageVo", pageVo);
-		boardSearch.put("typeChk", typeChk);
 		
-		
-		boardList = boardService.SelectBoardList(boardSearch);
+		boardList = boardService.SelectBoardList(pageVo);
 		totalCnt = boardService.selectBoardCnt();
 		comCodeList = comCodeService.SelectComCodeList();
 		
@@ -76,34 +71,13 @@ public class BoardController {
 		
 	}
 	
-	
-	
-//	@RequestMapping(value = "/board/boardListSearch.do", method = RequestMethod.GET)
-//	@ResponseBody
-//	public String boardList(@RequestParam("typeChk[]") List<String> typeChk, PageVo pageVo, Model model) throws Exception{
-//		
-//		List<BoardVo> boardList = new ArrayList<BoardVo>();
-//		
-//		HashMap<String, Object> boardListMap = new HashMap<String, Object>();
-//		
-//		boardListMap.put("pageVo", pageVo);
-//		boardListMap.put("typeChk", typeChk);
-//
-//		System.out.println(boardListMap.get("typeChk"));
-//		
-//		boardList = boardService.SelectBoardList(pageVo);
-//		
-//		model.addAttribute("boardList", boardList);
-//			
-//		return "1";
-//	}
+
 	
 	@RequestMapping(value = "/board/{boardType}/{boardNum}/boardView.do", method = RequestMethod.GET)
 	public String boardView(Locale locale, Model model
 			,@PathVariable("boardType")String boardType
-			,@PathVariable("boardNum")int boardNum) throws Exception{
-		
-		BoardVo boardVo = new BoardVo();
+			,@PathVariable("boardNum")int boardNum
+			,BoardVo boardVo) throws Exception{
 		
 		System.out.println("==========================보드타입" + boardType);
 		
@@ -113,8 +87,6 @@ public class BoardController {
 			return "board/msgbox";
 			
 		}
-		model.addAttribute("boardType", boardType);
-		model.addAttribute("boardNum", boardNum);
 		model.addAttribute("board", boardVo);
 		
 		return "board/boardView";
@@ -125,9 +97,10 @@ public class BoardController {
 		
 		List<ComCodeVo> comCodeList = new ArrayList<ComCodeVo>();
 		
-		
 		comCodeList = comCodeService.SelectComCodeList();
+		
 		model.addAttribute("comCodeList", comCodeList);
+		
 		return "board/boardWrite";
 	}
 	
@@ -153,13 +126,13 @@ public class BoardController {
 	//게시판 삭제 메서드
 	@RequestMapping(value = "/board/boardDeleteAction.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String Delete(BoardVo boardVO) throws Exception{
+	public String Delete(BoardVo boardVo) throws Exception{
 		
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		
-		int boardNum = boardVO.getBoardNum();
-		int deleteRes = boardService.boardDelete(boardNum);
+		
+		int deleteRes = boardService.boardDelete(boardVo);
 		
 		result.put("success", (deleteRes > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);

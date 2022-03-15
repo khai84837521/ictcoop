@@ -33,8 +33,39 @@
 			    }
 			});
 		});
+	
+	
+
 	});
 	
+	function addRow() {
+		  var count = 1;
+		
+	      var dynamicTable = document.getElementById('boardWriter');
+	      var newRow1 = dynamicTable.insertRow();
+	      var cell1 = newRow1.insertCell();
+	      var cell2 = newRow1.insertCell();
+	      var newRow2 = dynamicTable.insertRow();
+	      var cell3 = newRow2.insertCell();
+	      var cell4 = newRow2.insertCell();
+	      var newRow3 = dynamicTable.insertRow();
+	      var cell5 = newRow3.insertCell();
+	      var cell6 = newRow3.insertCell();
+	      
+	      cell1.innerHTML = 'Type';
+	      cell2.innerHTML = '<select name = "codeId'+count+'">'
+	      						+'<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">'
+	      							+'<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>'
+	      						+'</c:forEach>'
+	      					+'</select>';
+	      cell3.innerHTML = 'Title';
+	      cell4.innerHTML = '<input name="boardTitle'+count+'" type="text" size="50" value="${board.boardTitle}">';
+	      cell5.innerHTML = 'Comment';
+	      cell6.innerHTML = '<textarea name="boardComment'+count+'" rows="20" cols="55">${board.boardComment}</textarea>';
+	      
+	      count++;
+	      
+	   }
 
 </script>
 <body>
@@ -42,18 +73,19 @@
 	<table align="center">
 		<tr>
 			<td align="right">
+			<input type="button" value="행추가" onclick='addRow()'>
 			<input id="submit" type="button" value="작성">
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<table border ="1">
+				<table border ="1" id = "boardWriter">
 					<tr>
 						<td width="120" align="center">
 						Type
 						</td>
 						<td width="400">
-						<select name = "codeId">
+						<select name = "codeId0">
 							<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">
 								<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>
 							</c:forEach>
@@ -65,7 +97,7 @@
 						Title
 						</td>
 						<td width="400">
-						<input name="boardTitle" type="text" size="50" value="${board.boardTitle}"> 
+						<input name="boardTitle0" type="text" size="50" value="${board.boardTitle}"> 
 						</td>
 					</tr>
 					<tr>
@@ -73,7 +105,7 @@
 						Comment
 						</td>
 						<td valign="top">
-						<textarea name="boardComment"  rows="20" cols="55">${board.boardComment}</textarea>
+						<textarea name="boardComment0"  rows="20" cols="55">${board.boardComment}</textarea>
 						</td>
 					</tr>
 					<tr>

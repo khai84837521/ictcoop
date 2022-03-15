@@ -29,9 +29,9 @@ public class BoardDaoImpl implements BoardDao{
 	 * 
 	 * */
 	@Override
-	public List<BoardVo> selectBoardList(HashMap<String, Object> boardSearch) throws Exception {
+	public List<BoardVo> selectBoardList(PageVo pageVo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("board.boardList",boardSearch);
+		return sqlSession.selectList("board.boardList",pageVo);
 	}
 	
 	@Override
@@ -52,9 +52,9 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.insert("board.boardInsert", boardVo);
 	}
 	@Override
-	public int boardDelete(int boardNum) throws Exception {
+	public int boardDelete(BoardVo boardVo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("board.boardDelete", boardNum);
+		return sqlSession.delete("board.boardDelete", boardVo);
 	}
 	@Override
 	public int boardUpdate(BoardVo boardVo) throws Exception {

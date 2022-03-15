@@ -93,7 +93,7 @@
 				<c:forEach items="${boardList}" var="list">
 					<tr>
 						<td align="center">
-							${list.boardType}
+							${list.codeName}
 						</td>
 						<td>
 							${list.boardNum}

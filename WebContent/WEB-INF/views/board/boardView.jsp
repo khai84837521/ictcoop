@@ -24,7 +24,7 @@
 						    data : param,
 						    success: function(data, textStatus, jqXHR)
 						    {
-								alert("수정완료");
+						    	alert('성공');
 								location.reload();
 						    },
 						    error: function (jqXHR, textStatus, errorThrown)
@@ -48,7 +48,8 @@
 				var deleteConfirm = confirm('삭제하시겠습니까?');
 				if(deleteConfirm == true){
 					var params = {
-							boardNum : $j('#boardNum').val() 
+							boardNum : $j('#boardNum').val()
+							,boardType : $j('#boardType').val()
 						};
 					
 					$j.ajax({
@@ -57,9 +58,18 @@
 						data : params,
 					    success: function(data, textStatus, jqXHR)
 					    {
-							alert("삭제완료");
+					    	
+					    	var callbackMsg = JSON.parse(data);
+					    	
+					    	if(callbackMsg.success == 'Y'){
+								alert("삭제완료");	
 							
+					    	}else{
+					    		alert('삭제된 페이지 입니다.');
+					    	}
+
 							location.href = "/board/boardList.do";
+					    	
 					    },
 					    error: function (jqXHR, textStatus, errorThrown)
 					    {
@@ -77,6 +87,7 @@
 <body class = "boardUpdate">
 <!-- hidden tags -->
 <input id = "boardNum" name = "boardNum" type="hidden" value="${boardNum}">
+<input id = "boardType" name = "boardType" type="hidden" value="${board.boardType}">
 <table align="center">
 		<tr>
 			<td align="right">
@@ -95,7 +106,7 @@
 					</td>
 					<td width="400">
 					<span id = "boardType">
-					${board.boardType}
+					${board.codeName}
 					</span>
 					</td>
 				</tr>

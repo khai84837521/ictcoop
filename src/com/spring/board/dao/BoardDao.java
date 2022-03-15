@@ -10,7 +10,7 @@ public interface BoardDao {
 
 	public String selectTest() throws Exception;
 
-	public List<BoardVo> selectBoardList(HashMap<String, Object> boardSearch) throws Exception;
+	public List<BoardVo> selectBoardList(PageVo pageVo) throws Exception;
 
 	public BoardVo selectBoard(BoardVo boardVo) throws Exception;
 
@@ -18,7 +18,7 @@ public interface BoardDao {
 
 	public int boardInsert(BoardVo boardVo) throws Exception;
 	
-	public int boardDelete(int boardNum) throws Exception;
+	public int boardDelete(BoardVo boardVo) throws Exception;
 	
 	public int boardUpdate(BoardVo boardVo) throws Exception;
 

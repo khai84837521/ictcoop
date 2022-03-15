@@ -9,8 +9,15 @@ public class BoardVo {
 	private String 	creator;
 	private String	modifier;
 	private int totalCnt;
+	private String codeName;
 	
 	
+	public String getCodeName() {
+		return codeName;
+	}
+	public void setCodeName(String codeName) {
+		this.codeName = codeName;
+	}
 	public int getTotalCnt() {
 		return totalCnt;
 	}

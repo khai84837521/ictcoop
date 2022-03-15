@@ -10,7 +10,7 @@ public interface boardService {
 
 	public String selectTest() throws Exception;
 
-	public List<BoardVo> SelectBoardList(HashMap<String, Object> boardSearch) throws Exception;
+	public List<BoardVo> SelectBoardList(PageVo pageVo) throws Exception;
 
 	public BoardVo selectBoard(String boardType, int boardNum) throws Exception;
 
@@ -18,7 +18,7 @@ public interface boardService {
 
 	public int boardInsert(BoardVo boardVo) throws Exception;
 	
-	public int boardDelete(int boardNum) throws Exception;
+	public int boardDelete(BoardVo boardVo) throws Exception;
 	
 	public int boardUpdate(BoardVo boardVo) throws Exception;
 
