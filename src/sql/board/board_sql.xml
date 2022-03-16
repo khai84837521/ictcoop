@@ -68,29 +68,32 @@
     </select>	
     
     <select id="boardInsert" parameterType="com.spring.board.vo.BoardVo">
-        INSERT INTO 
-        BOARD
-        (BOARD_TYPE
-        ,BOARD_NUM
-        ,BOARD_TITLE
-        ,BOARD_COMMENT
-        ,CREATOR
-        ,CREATE_TIME
-        ,MODIFIER
-        ,MODIFIED_TIME
-        )
-        VALUES
-        (#{boardType}
-        ,(SELECT NVL(TO_NUMBER(MAX(BOARD_NUM)+1),1)
-	    	FROM BOARD
-	    	WHERE BOARD_TYPE = #{boardType})
-        ,#{boardTitle}
-        ,#{boardComment}
-        ,'SYSTEM'
-        ,TO_CHAR(SYSDATE)
-        ,'SYSTEM'
-        ,TO_CHAR(SYSDATE)
-        )
+        INSERT ALL
+        <foreach collection="boardVoList" item = "boardVoList" open="(" close=")">
+        INTO
+	        BOARD
+	        (BOARD_TYPE
+	        ,BOARD_NUM
+	        ,BOARD_TITLE
+	        ,BOARD_COMMENT
+	        ,CREATOR
+	        ,CREATE_TIME
+	        ,MODIFIER
+	        ,MODIFIED_TIME
+	        )
+	        VALUES
+	        (#{boardVoList.boardType}
+	        ,(SELECT NVL(TO_NUMBER(MAX(BOARD_NUM)+1),1)
+		    	FROM BOARD
+		    	WHERE BOARD_TYPE = #{boardVoList.boardType})
+	        ,#{boardVoList.boardTitle}
+	        ,#{boardVoList.boardComment}
+	        ,'SYSTEM'
+	        ,TO_CHAR(SYSDATE)
+	        ,'SYSTEM'
+	        ,TO_CHAR(SYSDATE)
+	        )
+	    </foreach>
     </select>
     
     <delete id="boardDelete" parameterType="com.spring.board.vo.BoardVo">

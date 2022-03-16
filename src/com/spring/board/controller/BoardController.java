@@ -112,19 +112,25 @@ public class BoardController {
 		CommonUtil commonUtil = new CommonUtil();
 		
 		int resultCnt = 0;
-		String[] boardTypes = request.getParameterValues("codeId");
-		String[] boardTitles = request.getParameterValues("boardTitle");
-		String[] boardComments = request.getParameterValues("boardComment");
+//		String[] boardTypes = request.getParameterValues("codeId");
+//		String[] boardTitles = request.getParameterValues("boardTitle");
+//		String[] boardComments = request.getParameterValues("boardComment");
 		
-		for (int i = 0; i < boardTitles.length; i++) {
+//		for (int i = 0; i < boardVo.getBoardVoList().size(); i++) {
+//			System.out.println(boardVo.getBoardTitleArr().length);
+//			System.out.println("보드타입 ====================="+boardVo.getBoardTypeArr()[i]);
+//			System.out.println("보드타이틀 ====================="+boardVo.getBoardTitleArr()[i]);
+//			System.out.println("보드타입 ====================="+boardVo.getBoardCommentArr()[i]);
+//
+//			
+		resultCnt =+ boardService.boardInsert(boardVo);
+//		System.out.println( boardVo.getBoardVoList().size());
+//		System.out.println(boardVo.getBoardVoList().get(i).getBoardType());
+//		System.out.println(boardVo.getBoardVoList().get(i).getBoardTitle());
+//		System.out.println(boardVo.getBoardVoList().get(i).getBoardComment());
+//		
+//		}
 
-			boardVo.setBoardType(boardTypes[i]);
-			boardVo.setBoardTitle(boardTitles[i]);
-			boardVo.setBoardComment(boardComments[i]);
-			
-			resultCnt =+ boardService.boardInsert(boardVo);
-		}
-		
 		System.out.println(resultCnt);
 		
 		result.put("success", (resultCnt > 0)?"Y":"N");

@@ -24,9 +24,11 @@
 			    {
 					alert("작성완료");
 					
-					alert("메세지:"+data.success);
+// 					alert("메세지:"+data.success);
 					
-					location.href = "/board/boardList.do?pageNo=1";
+// 					alert(param);
+					
+// 					location.href = "/board/boardList.do?pageNo=1";
 			    },
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
@@ -38,6 +40,8 @@
 	
 
 	});
+	
+	var count = 1;
 	
 	function addRow() {
 		
@@ -53,15 +57,17 @@
 	      var cell6 = newRow3.insertCell();
 	      
 	      cell1.innerHTML = 'Type';
-	      cell2.innerHTML = '<select name = "codeId">'
+	      cell2.innerHTML = '<select name = "boardVoList['+count+'].boardType">'
 	      						+'<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">'
 	      							+'<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>'
 	      						+'</c:forEach>'
 	      					+'</select>';
 	      cell3.innerHTML = 'Title';
-	      cell4.innerHTML = '<input name="boardTitle" type="text" size="50" value="${board.boardTitle}">';
+	      cell4.innerHTML = '<input name="boardVoList['+count+'].boardTitle" type="text" size="50" value="${board.boardTitle}">';
 	      cell5.innerHTML = 'Comment';
-	      cell6.innerHTML = '<textarea name="boardComment" rows="20" cols="55">${board.boardComment}</textarea>';
+	      cell6.innerHTML = '<textarea name="boardVoList['+count+'].boardComment" rows="20" cols="55">${board.boardComment}</textarea>';
+	      
+	      count++
 	   }
 
 	
@@ -96,7 +102,7 @@
 						Type
 						</td>
 						<td width="400">
-						<select name = "codeId">
+						<select name = "boardVoList[0].boardType">
 							<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">
 								<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>
 							</c:forEach>
@@ -108,7 +114,7 @@
 						Title
 						</td>
 						<td width="400">
-						<input name="boardTitle" type="text" size="50" value="${board.boardTitle}"> 
+						<input name="boardVoList[0].boardTitle" type="text" size="50" value="${board.boardTitle}"> 
 						</td>
 					</tr>
 					<tr>
@@ -116,7 +122,7 @@
 						Comment
 						</td>
 						<td valign="top">
-						<textarea name="boardComment"  rows="20" cols="55">${board.boardComment}</textarea>
+						<textarea name="boardVoList[0].boardComment"  rows="20" cols="55">${board.boardComment}</textarea>
 						</td>
 					</tr>
 					<tr>

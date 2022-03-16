@@ -1,34 +1,50 @@
 package com.spring.board.vo;
 
+import java.util.List;
+
 public class BoardVo {
 	
-	private String 	boardType;
+	private String boardType;
 	private int 	boardNum;
-	private String 	boardTitle;
-	private String 	boardComment;
+	private String boardTitle;
+	private String boardComment;
 	private String 	creator;
 	private String	modifier;
 	private int totalCnt;
 	private String codeName;
 	
+	//게시판 다중 insert
+	private String[] boardTypeArr;
+	private String[] boardTitleArr;
+	private String[] boardCommentArr;
 	
-	public String getCodeName() {
-		return codeName;
+	private List<BoardVo> boardVoList;
+	
+	public List<BoardVo> getBoardVoList() {
+		return boardVoList;
 	}
-	public void setCodeName(String codeName) {
-		this.codeName = codeName;
+	public void setBoardVoList(List<BoardVo> boardVoList) {
+		this.boardVoList = boardVoList;
 	}
-	public int getTotalCnt() {
-		return totalCnt;
+	
+	
+	public String[] getBoardTypeArr() {
+		return boardTypeArr;
 	}
-	public void setTotalCnt(int totalCnt) {
-		this.totalCnt = totalCnt;
+	public void setBoardTypeArr(String[] boardTypeArr) {
+		this.boardTypeArr = boardTypeArr;
 	}
-	public int getBoardNum() {
-		return boardNum;
+	public String[] getBoardTitleArr() {
+		return boardTitleArr;
 	}
-	public void setBoardNum(int boardNum) {
-		this.boardNum = boardNum;
+	public void setBoardTitleArr(String[] boardTitleArr) {
+		this.boardTitleArr = boardTitleArr;
+	}
+	public String[] getBoardCommentArr() {
+		return boardCommentArr;
+	}
+	public void setBoardCommentArr(String[] boardCommentArr) {
+		this.boardCommentArr = boardCommentArr;
 	}
 	public String getBoardType() {
 		return boardType;
@@ -48,6 +64,25 @@ public class BoardVo {
 	public void setBoardComment(String boardComment) {
 		this.boardComment = boardComment;
 	}
+	public String getCodeName() {
+		return codeName;
+	}
+	public void setCodeName(String codeName) {
+		this.codeName = codeName;
+	}
+	public int getTotalCnt() {
+		return totalCnt;
+	}
+	public void setTotalCnt(int totalCnt) {
+		this.totalCnt = totalCnt;
+	}
+	public int getBoardNum() {
+		return boardNum;
+	}
+	public void setBoardNum(int boardNum) {
+		this.boardNum = boardNum;
+	}
+
 	public String getCreator() {
 		return creator;
 	}
