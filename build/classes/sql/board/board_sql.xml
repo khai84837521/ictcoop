@@ -68,8 +68,37 @@
     </select>	
     
     <update id="boardInsert" parameterType="com.spring.board.vo.BoardVo" >
-        BEGIN
-        <foreach collection="boardVoList" item = "boardVoList">
+<!--         BEGIN -->
+<!--         <foreach collection="boardVoList" item = "boardVoList"> -->
+<!--         <if test="boardVoList.boardType != null"> -->
+<!--         INSERT -->
+<!--         INTO -->
+<!-- 	        BOARD -->
+<!-- 	        (BOARD_TYPE -->
+<!-- 	        ,BOARD_NUM -->
+<!-- 	        ,BOARD_TITLE -->
+<!-- 	        ,BOARD_COMMENT -->
+<!-- 	        ,CREATOR -->
+<!-- 	        ,CREATE_TIME -->
+<!-- 	        ,MODIFIER -->
+<!-- 	        ,MODIFIED_TIME -->
+<!-- 	        ) -->
+<!-- 	        VALUES -->
+<!-- 	        (#{boardVoList.boardType} -->
+<!-- 	        ,(SELECT NVL(TO_NUMBER(MAX(BOARD_NUM)+1),1) -->
+<!-- 		    	FROM BOARD -->
+<!-- 		    	WHERE BOARD_TYPE = #{boardVoList.boardType}) -->
+<!-- 	        ,#{boardVoList.boardTitle} -->
+<!-- 	        ,#{boardVoList.boardComment} -->
+<!-- 	        ,'SYSTEM' -->
+<!-- 	        ,TO_CHAR(SYSDATE) -->
+<!-- 	        ,'SYSTEM' -->
+<!-- 	        ,TO_CHAR(SYSDATE) -->
+<!-- 	        ); -->
+<!-- 	     </if> -->
+<!-- 	    </foreach> -->
+<!--     END; -->
+		<if test="boardVoList.boardType != null">
         INSERT
         INTO
 	        BOARD
@@ -93,9 +122,8 @@
 	        ,TO_CHAR(SYSDATE)
 	        ,'SYSTEM'
 	        ,TO_CHAR(SYSDATE)
-	        );
-	    </foreach>
-    END;
+	        )
+	        </if>
     </update>
     
     <delete id="boardDelete" parameterType="com.spring.board.vo.BoardVo">

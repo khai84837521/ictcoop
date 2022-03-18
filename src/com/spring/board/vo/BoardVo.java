@@ -13,10 +13,7 @@ public class BoardVo {
 	private int totalCnt;
 	private String codeName;
 	
-	//게시판 다중 insert
-	private String[] boardTypeArr;
-	private String[] boardTitleArr;
-	private String[] boardCommentArr;
+
 	
 	private List<BoardVo> boardVoList;
 	
@@ -28,24 +25,6 @@ public class BoardVo {
 	}
 	
 	
-	public String[] getBoardTypeArr() {
-		return boardTypeArr;
-	}
-	public void setBoardTypeArr(String[] boardTypeArr) {
-		this.boardTypeArr = boardTypeArr;
-	}
-	public String[] getBoardTitleArr() {
-		return boardTitleArr;
-	}
-	public void setBoardTitleArr(String[] boardTitleArr) {
-		this.boardTitleArr = boardTitleArr;
-	}
-	public String[] getBoardCommentArr() {
-		return boardCommentArr;
-	}
-	public void setBoardCommentArr(String[] boardCommentArr) {
-		this.boardCommentArr = boardCommentArr;
-	}
 	public String getBoardType() {
 		return boardType;
 	}

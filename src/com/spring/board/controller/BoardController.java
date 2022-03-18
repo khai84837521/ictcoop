@@ -113,7 +113,16 @@ public class BoardController {
 		
 		int resultCnt = 0;
 
-		resultCnt = boardService.boardInsert(boardVo);
+		
+		
+		
+		for (int i = 0; i < boardVo.getBoardVoList().size(); i++) {
+//			System.out.println(i);
+//			boardVo.getBoardTitle();
+			resultCnt =+ boardService.boardInsert(boardVo.getBoardVoList().get(i));
+		}
+
+//		resultCnt = boardService.boardInsert(boardVo);
 		result.put("success", (resultCnt < 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		

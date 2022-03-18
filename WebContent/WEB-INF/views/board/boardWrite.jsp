@@ -42,18 +42,20 @@
 	var count = 1;
 	
 	function addRow() {
-		
 	      var dynamicTable = document.getElementById('boardWriter');
-	      var newRow1 = dynamicTable.insertRow(0);
+// 	      var dynamicTableIndex = addRowNum.parentNode.parentNode.rowIndex;
+		  var writerRow = document.getElementById('writer').parentNode.rowIndex;
+		  alert(writerRow);
+	      var newRow1 = dynamicTable.insertRow(writerRow);
 	      var cell1 = newRow1.insertCell();
 	      cell1.setAttribute('align','center');
 	      cell1.setAttribute('width','120');
 	      var cell2 = newRow1.insertCell();
-	      var newRow2 = dynamicTable.insertRow(1);
+	      var newRow2 = dynamicTable.insertRow(writerRow+1);
 	      var cell3 = newRow2.insertCell();
 	      cell3.setAttribute('align','center');
 	      var cell4 = newRow2.insertCell();
-	      var newRow3 = dynamicTable.insertRow(2);
+	      var newRow3 = dynamicTable.insertRow(writerRow+2);
 	      var cell5 = newRow3.insertCell();
 	      cell5.setAttribute('align','center');
 	      var cell6 = newRow3.insertCell();
@@ -73,15 +75,16 @@
 	      count++
 	   }
 
-	function deleteRow(rownum) {
+	function deleteRow(deleteRowNum) {
 		  // table element Ã£±â
 		  const dynamicTable = document.getElementById('boardWriter');
-     	  var index = rownum.parentNode.parentNode.rowIndex;
+     	  var tableRowIndex = deleteRowNum.parentNode.parentNode.rowIndex;
 		  if(dynamicTable.rows.length != 4){
-			  dynamicTable.deleteRow(index+2);
-			  dynamicTable.deleteRow(index+1);
-			  dynamicTable.deleteRow(index);
+			  dynamicTable.deleteRow(tableRowIndex+2);
+			  dynamicTable.deleteRow(tableRowIndex+1);
+			  dynamicTable.deleteRow(tableRowIndex);
 		  }
+		  
 	}
 </script>
 <body>
@@ -126,7 +129,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="center">
+						<td id = writer align="center">
 						Writer
 						</td>
 						<td>
