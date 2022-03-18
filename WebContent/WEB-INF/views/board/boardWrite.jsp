@@ -24,11 +24,9 @@
 			    {
 					alert("작성완료");
 					
-// 					alert("메세지:"+data.success);
+					alert("메세지:"+data.success);
 					
-// 					alert(param);
-					
-// 					location.href = "/board/boardList.do?pageNo=1";
+					location.href = "/board/boardList.do?pageNo=1";
 			    },
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
@@ -48,12 +46,16 @@
 	      var dynamicTable = document.getElementById('boardWriter');
 	      var newRow1 = dynamicTable.insertRow(0);
 	      var cell1 = newRow1.insertCell();
+	      cell1.setAttribute('align','center');
+	      cell1.setAttribute('width','120');
 	      var cell2 = newRow1.insertCell();
 	      var newRow2 = dynamicTable.insertRow(1);
 	      var cell3 = newRow2.insertCell();
+	      cell3.setAttribute('align','center');
 	      var cell4 = newRow2.insertCell();
 	      var newRow3 = dynamicTable.insertRow(2);
 	      var cell5 = newRow3.insertCell();
+	      cell5.setAttribute('align','center');
 	      var cell6 = newRow3.insertCell();
 	      
 	      cell1.innerHTML = 'Type';
@@ -61,7 +63,8 @@
 	      						+'<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">'
 	      							+'<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>'
 	      						+'</c:forEach>'
-	      					+'</select>';
+	      					+'</select>'
+	      					+ "<input style='float: right;' type='button' value='행삭제' onclick='deleteRow(this)'>";
 	      cell3.innerHTML = 'Title';
 	      cell4.innerHTML = '<input name="boardVoList['+count+'].boardTitle" type="text" size="50" value="${board.boardTitle}">';
 	      cell5.innerHTML = 'Comment';
@@ -70,19 +73,16 @@
 	      count++
 	   }
 
-	
 	function deleteRow(rownum) {
 		  // table element 찾기
 		  const dynamicTable = document.getElementById('boardWriter');
+     	  var index = rownum.parentNode.parentNode.rowIndex;
 		  if(dynamicTable.rows.length != 4){
-			  dynamicTable.deleteRow(rownum);
-			  dynamicTable.deleteRow(rownum);
-			  dynamicTable.deleteRow(rownum);
+			  dynamicTable.deleteRow(index+2);
+			  dynamicTable.deleteRow(index+1);
+			  dynamicTable.deleteRow(index);
 		  }
 	}
-	
-	
-	
 </script>
 <body>
 <form class="boardWrite">
@@ -90,7 +90,6 @@
 		<tr>
 			<td align="right">
 			<input type="button" value="행추가" onclick='addRow()'>
-			<input type='button' value='행삭제' onclick='deleteRow(0)'>
 			<input id="submit" type="button" value="작성">
 			</td>
 		</tr>
@@ -107,6 +106,7 @@
 								<option value = "${comCodeList.codeId}">${comCodeList.codeName}</option>
 							</c:forEach>
 						</select>
+						<input style="float: right;" type='button' value='행삭제' onclick='deleteRow(this)'>
 						</td>
 					</tr>
 					<tr>

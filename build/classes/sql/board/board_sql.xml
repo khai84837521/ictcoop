@@ -67,9 +67,10 @@
     	AND 	B.BOARD_NUM  = #{boardNum}
     </select>	
     
-    <select id="boardInsert" parameterType="com.spring.board.vo.BoardVo">
-        INSERT ALL
-        <foreach collection="boardVoList" item = "boardVoList" open="(" close=")">
+    <update id="boardInsert" parameterType="com.spring.board.vo.BoardVo" >
+        BEGIN
+        <foreach collection="boardVoList" item = "boardVoList">
+        INSERT
         INTO
 	        BOARD
 	        (BOARD_TYPE
@@ -92,9 +93,10 @@
 	        ,TO_CHAR(SYSDATE)
 	        ,'SYSTEM'
 	        ,TO_CHAR(SYSDATE)
-	        )
+	        );
 	    </foreach>
-    </select>
+    END;
+    </update>
     
     <delete id="boardDelete" parameterType="com.spring.board.vo.BoardVo">
     	DELETE FROM BOARD
