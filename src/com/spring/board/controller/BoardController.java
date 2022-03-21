@@ -113,17 +113,19 @@ public class BoardController {
 		
 		int resultCnt = 0;
 
+//      sql반복문 방법 1
+//		resultCnt = boardService.boardInsert(boardVo);
 		
 		
-		
+		// 컨트로러 반복문 방법2
 		for (int i = 0; i < boardVo.getBoardVoList().size(); i++) {
-//			System.out.println(i);
-//			boardVo.getBoardTitle();
-			resultCnt =+ boardService.boardInsert(boardVo.getBoardVoList().get(i));
+			if (boardVo.getBoardVoList().get(i).getBoardTitle() != null) {
+				resultCnt += boardService.boardInsert(boardVo.getBoardVoList().get(i));
+			}
 		}
 
-//		resultCnt = boardService.boardInsert(boardVo);
-		result.put("success", (resultCnt < 0)?"Y":"N");
+		System.out.println(resultCnt);
+		result.put("success", (resultCnt > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		
 		System.out.println("callbackMsg::"+callbackMsg);

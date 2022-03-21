@@ -45,7 +45,6 @@
 	      var dynamicTable = document.getElementById('boardWriter');
 // 	      var dynamicTableIndex = addRowNum.parentNode.parentNode.rowIndex;
 		  var writerRow = document.getElementById('writer').parentNode.rowIndex;
-		  alert(writerRow);
 	      var newRow1 = dynamicTable.insertRow(writerRow);
 	      var cell1 = newRow1.insertCell();
 	      cell1.setAttribute('align','center');
