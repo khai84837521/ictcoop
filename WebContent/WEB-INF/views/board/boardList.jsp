@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -118,17 +118,17 @@
 	</tr>
 	<tr>
 		<td align="right">
-			<a href ="/board/boardWrite.do">±Û¾²±â</a>
+			<a href ="/board/boardWrite.do">ê¸€ì“°ê¸°</a>
 		</td>
 	</tr>
 	<tr align="left">
 		<td>
 			<form action="/board/boardList.do" method = "get" id = "form">
-			<input type ="checkbox" id ="chkBoxAll">ÀüÃ¼
+			<input type ="checkbox" id ="chkBoxAll">ì „ì²´
 			<c:forEach var = "comCodeList" items = "${comCodeList}" varStatus="status">
 				<input id = "${comCodeList.codeId}" type ="checkbox" name = "typeChk" value="${comCodeList.codeId}">${comCodeList.codeName}
 			</c:forEach>
-			<input type = "submit" id = "search" value="Á¶È¸">
+			<input type = "submit" id = "search" value="ì¡°íšŒ">
 			</form>
 		</td>
 	</tr>

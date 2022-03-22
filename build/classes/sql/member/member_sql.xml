@@ -29,8 +29,7 @@
 	        ,USER_COMPANY
 	        )
 	        VALUES
-	        ((SELECT NVL(TO_NUMBER(MAX(BOARD_NUM)+1),1)
-		    	FROM USER_INFO)
+	        (#{userId}
 	        ,#{userPw}
 	        ,#{userName}
 	        ,#{userPhone1}

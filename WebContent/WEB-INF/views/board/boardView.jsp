@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/common.jsp"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -7,12 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>boardView</title>
 	<script type="text/javascript">
-		//°Ô½ÃÆÇ ±Û ¼öÁ¤
+		//ê²Œì‹œíŒ ê¸€ ìˆ˜ì •
 		$j(document).ready(function(){
 			
 			$j("#updateBtn").on("click",function(){
-				if($j('#updateBtn').val() == "È®ÀÎ"){
-					var uConfirm = confirm("¼öÁ¤ÇÏ½Ã°Ú½À´Ï±î?");
+				if($j('#updateBtn').val() == "í™•ì¸"){
+					var uConfirm = confirm("ìˆ˜ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 					if(uConfirm == true){
 						var $frm = $j('.boardUpdate :input');
 						var param = $frm.serialize();
@@ -24,12 +24,12 @@
 						    data : param,
 						    success: function(data, textStatus, jqXHR)
 						    {
-						    	alert('¼º°ø');
+						    	alert('ì„±ê³µ');
 								location.reload();
 						    },
 						    error: function (jqXHR, textStatus, errorThrown)
 						    {
-						    	alert("½ÇÆĞ");
+						    	alert("ì‹¤íŒ¨");
 						    }
 						});
 					}else{
@@ -39,13 +39,13 @@
 					$j('#boardTitle').html('<input name="boardTitle" type="text" size="50" value="${board.boardTitle}">');
 					$j('#boardComment').html('<textarea name="boardComment"  rows="20" cols="55">${board.boardComment}</textarea>');
 					$j('#deleteBtn').attr('type', 'hidden');
-					$j('#updateBtn').val("È®ÀÎ");	
+					$j('#updateBtn').val("í™•ì¸");	
 				}
-			}); //°³½ÃÆÇ ±Û ¼öÁ¤
+			}); //ê°œì‹œíŒ ê¸€ ìˆ˜ì •
 
-			//°Ô½ÃÆÇ ±Û »èÁ¦
+			//ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 			$j('#deleteBtn').on("click", function(){
-				var deleteConfirm = confirm('»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?');
+				var deleteConfirm = confirm('ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 				if(deleteConfirm == true){
 					var params = {
 							boardNum : $j('#boardNum').val()
@@ -62,10 +62,10 @@
 					    	var callbackMsg = JSON.parse(data);
 					    	
 					    	if(callbackMsg.success == 'Y'){
-								alert("»èÁ¦¿Ï·á");	
+								alert("ì‚­ì œì™„ë£Œ");	
 							
 					    	}else{
-					    		alert('»èÁ¦µÈ ÆäÀÌÁö ÀÔ´Ï´Ù.');
+					    		alert('ì‚­ì œëœ í˜ì´ì§€ ì…ë‹ˆë‹¤.');
 					    	}
 
 							location.href = "/board/boardList.do";
@@ -73,12 +73,12 @@
 					    },
 					    error: function (jqXHR, textStatus, errorThrown)
 					    {
-					    	alert("½ÇÆĞ");
+					    	alert("ì‹¤íŒ¨");
 					    }
 					});
 				}
 
-			});		//°Ô½ÃÆÇ ±Û »èÁ¦
+			});		//ê²Œì‹œíŒ ê¸€ ì‚­ì œ
 			
 		});//document ready
 	</script>
@@ -91,8 +91,8 @@
 <table align="center">
 		<tr>
 			<td align="right">
-					<input id = "updateBtn" type="button" value="¼öÁ¤"> <!-- °Ô½ÃÆÇ ¼öÁ¤ ¹öÆ° -->
-					<input id = "deleteBtn" type="button" value="»èÁ¦"> <!-- °Ô½ÃÆÇ »èÁ¦  ¹öÆ°-->
+					<input id = "updateBtn" type="button" value="ìˆ˜ì •"> <!-- ê²Œì‹œíŒ ìˆ˜ì • ë²„íŠ¼ -->
+					<input id = "deleteBtn" type="button" value="ì‚­ì œ"> <!-- ê²Œì‹œíŒ ì‚­ì œ  ë²„íŠ¼-->
 			</td>
 			
 		</tr>

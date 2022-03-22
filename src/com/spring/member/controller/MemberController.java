@@ -27,10 +27,10 @@ public class MemberController {
 	@RequestMapping(value = "/member/joinAction.do", method = RequestMethod.POST)
 	public String memberJoinAction(MemberVo memberVo) throws Exception{
 
-		System.out.println(memberVo.getUserId());
+//		System.out.println(memberVo.getUserId());
 		
 		int resultCnt = memberService.insertMember(memberVo);
 		
-		return "member/join";
+		return "redirect:/board/boardList.do";
 	}
 }

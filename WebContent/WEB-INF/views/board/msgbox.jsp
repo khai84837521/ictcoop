@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <script type="text/javascript">
-	alert('»èÁ¦µÈ ÆäÀÌÁö ÀÔ´Ï´Ù');
+	alert('ì‚­ì œëœ í˜ì´ì§€ ì…ë‹ˆë‹¤');
 	location.href = "/board/boardList.do";
 </script>
 </head>
