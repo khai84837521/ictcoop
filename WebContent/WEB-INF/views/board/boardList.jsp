@@ -76,8 +76,15 @@
 		<table width="100%">
 			<tr>
 				<td>
-					<a href = "/member/login.do">login</a>
-					<a href = "/member/join.do">join</a>
+					<c:choose>
+						<c:when test="${sessionScope.user.userId == null }">
+							<a href = "/member/login.do">login</a>
+							<a href = "/member/join.do">join</a>
+						</c:when>
+						<c:otherwise>
+							${sessionScope.user.userName }
+						</c:otherwise>
+					</c:choose>
 				</td>
 				<td align="right">
 					total : ${totalCnt}
@@ -119,6 +126,9 @@
 	<tr>
 		<td align="right">
 			<a href ="/board/boardWrite.do">글쓰기</a>
+			<c:if test="${sessionScope.user != null }">
+				<a href = "/member/logOut.do">로그아웃</a>
+			</c:if>
 		</td>
 	</tr>
 	<tr align="left">

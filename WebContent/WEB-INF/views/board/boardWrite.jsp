@@ -132,6 +132,7 @@
 						Writer
 						</td>
 						<td>
+							${sessionScope.user.userName }
 						</td>
 					</tr>
 				</table>

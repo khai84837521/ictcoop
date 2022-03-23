@@ -79,11 +79,11 @@ public class BoardController {
 			,@PathVariable("boardNum")int boardNum
 			,BoardVo boardVo) throws Exception{
 		
-		System.out.println("==========================º¸µåÅ¸ÀÔ" + boardType);
 		
 		boardVo = boardService.selectBoard(boardType,boardNum);
 		if(boardVo == null) {
-			System.out.println("»èÁ¦µÈ ÆäÀÌÁöÀÔ´Ï´Ù.");
+			model.addAttribute("msg", "ì‚­ì œëœ ê²Œì‹œë¬¼ ì…ë‹ˆë‹¤.");
+			model.addAttribute("url", "board/boardList");
 			return "board/msgbox";
 			
 		}
@@ -113,11 +113,11 @@ public class BoardController {
 		
 		int resultCnt = 0;
 
-//      sql¹İº¹¹® ¹æ¹ı 1
+//      sqlï¿½İºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1
 //		resultCnt = boardService.boardInsert(boardVo);
 		
 		
-		// ÄÁÆ®·Î·¯ ¹İº¹¹® ¹æ¹ı2
+		// ï¿½ï¿½Æ®ï¿½Î·ï¿½ ï¿½İºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½2
 		for (int i = 0; i < boardVo.getBoardVoList().size(); i++) {
 			if (boardVo.getBoardVoList().get(i).getBoardTitle() != null) {
 				resultCnt += boardService.boardInsert(boardVo.getBoardVoList().get(i));
@@ -133,7 +133,7 @@ public class BoardController {
 		return callbackMsg;
 	}
 	
-	//°Ô½ÃÆÇ »èÁ¦ ¸Ş¼­µå
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/board/boardDeleteAction.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String Delete(BoardVo boardVo) throws Exception{
@@ -151,7 +151,7 @@ public class BoardController {
 		return callbackMsg;
 	}
 	
-	//°Ô½ÃÆÇ ¾÷µ¥ÀÌÆ® ¸Ş¼­µå
+	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ş¼ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/board/boardUpadateAction.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String boardUpdateAction(Locale locale,BoardVo boardVo, Model model) throws Exception{

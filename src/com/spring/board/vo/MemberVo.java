@@ -1,4 +1,4 @@
-package com.spring.member.vo;
+package com.spring.board.vo;
 
 public class MemberVo {
 	private String userId;
